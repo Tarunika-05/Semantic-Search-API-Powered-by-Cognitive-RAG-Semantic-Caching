@@ -338,7 +338,7 @@ async def update_threshold(request: Request, threshold: float):
 
 
 @router.get("/clusters/analysis", dependencies=[Depends(require_role(Role.ADMIN))])
-@limiter.limit("10/minute")
+@limiter.limit("60/minute")
 def cluster_analysis(request: Request):
     logger.info("Running cluster analysis")
     from app.clustering import get_full_analysis
