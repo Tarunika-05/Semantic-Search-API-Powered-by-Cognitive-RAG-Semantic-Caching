@@ -1,4 +1,3 @@
-import pytest
 from app.dataset import _clean_text, _compute_fingerprint
 
 def test_clean_text_removes_urls():

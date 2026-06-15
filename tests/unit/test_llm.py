@@ -1,5 +1,4 @@
-import pytest
-from app.llm import generate_answer, DummyProvider, GeminiProvider
+from app.llm import generate_answer, DummyProvider
 
 def test_dummy_provider():
     provider = DummyProvider()

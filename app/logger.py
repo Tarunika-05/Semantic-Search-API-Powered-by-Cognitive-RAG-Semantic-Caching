@@ -1,7 +1,6 @@
 import logging
 import sys
 import structlog
-from uuid import uuid4
 
 def setup_logging():
     """

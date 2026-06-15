@@ -271,41 +271,10 @@ class SemanticCache:
     # Store a new entry (with LRU eviction)
     # ─────────────────────────────────────────────────────────────────
 
-    def store(
-        self,
-        query: str,
-        embedding: np.ndarray,
-        result: str,
-        dominant_cluster: int,
-        cluster_probs: Optional[np.ndarray] = None,
-        generated_answer: Optional[str] = None
-    ) -> CacheEntry:
-        """
-        Add a new query+result to the cache.
-
-        Before inserting:
-        1. Evict TTL-expired entries (lazy cleanup)
-        2. If cache is at max capacity, evict the LRU entry
-
-        After inserting:
-        - Updates the cluster index for fast cluster-aware lookups
-
-        Args:
-            query:            Raw query string
-            embedding:        L2-normalized embedding (384-dim)
-            result:           Computed result to cache
-            dominant_cluster: Cluster this query belongs to
-            cluster_probs:    Full soft distribution (for multi-cluster lookup)
-            generated_answer: The AI synthesized answer, if generated
-            citations:        List of citations used by the AI
-
-        Returns:
-            The newly created CacheEntry
-        """
     def store(self, query: str, embedding: np.ndarray, result: str,
               dominant_cluster: int, cluster_probs: np.ndarray | None = None,
               generated_answer: str | None = None,
-              citations: list[dict] | None = None):
+              citations: list[dict] | None = None) -> CacheEntry:
         """
         Store a new query and its result in the cache.
         Evicts stale and LRU entries if necessary.

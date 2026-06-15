@@ -120,7 +120,7 @@ def select_n_clusters(reduced_embeddings: np.ndarray) -> int:
 
     # Print evidence table
     print(f"\n{'─'*40}")
-    print(f"  GMM BIC Sweep")
+    print("  GMM BIC Sweep")
     print(f"{'─'*40}")
     print(f"  {'k':<6} {'BIC':>12}")
     print(f"  {'─'*22}")
@@ -370,14 +370,14 @@ def analyze_clusters(documents: list, cluster_probs: np.ndarray,
     print(f"{'='*55}")
 
     # ── Cluster Sizes ──
-    print(f"\n  [Cluster Sizes]")
+    print("\n  [Cluster Sizes]")
     for c in range(n_clusters):
         count = int(np.sum(dominant_clusters == c))
         if count > 0:
             print(f"    Cluster {c:>2d} : {count:>4d} docs")
 
     # ── Cluster Topics ──
-    print(f"\n  [Cluster Topics]")
+    print("\n  [Cluster Topics]")
     for c in range(n_clusters):
         if int(np.sum(dominant_clusters == c)) == 0:
             continue
@@ -385,7 +385,7 @@ def analyze_clusters(documents: list, cluster_probs: np.ndarray,
         print(f"    Cluster {c:>2d}: {', '.join(words)}")
 
     # ── Boundary Examples (top 3 highest entropy documents) ──
-    print(f"\n  [Boundary Examples]")
+    print("\n  [Boundary Examples]")
     top_boundary_indices = np.argsort(entropy)[-3:][::-1]
 
     for idx in top_boundary_indices:
@@ -402,7 +402,7 @@ def analyze_clusters(documents: list, cluster_probs: np.ndarray,
             print(f"      cluster {c_id:>2d} ({topic_label:>20s}) : {prob:.2f}")
 
     print(f"\n{'='*55}")
-    print(f"  💡 Full analysis: GET /clusters/analysis")
+    print("  💡 Full analysis: GET /clusters/analysis")
     print(f"{'='*55}\n")
 
 
@@ -542,5 +542,5 @@ def load_clustering():
     with open(CLUSTERING_CACHE_PATH, "rb") as f:
         data = pickle.load(f)
 
-    print(f"✅ Clustering loaded.")
+    print("✅ Clustering loaded.")
     return data["gmm"], data["pca"], data["cluster_probs"], data["dominant_clusters"]

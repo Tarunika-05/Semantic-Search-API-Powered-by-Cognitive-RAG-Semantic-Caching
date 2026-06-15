@@ -1,7 +1,6 @@
 import pytest
 from fastapi.testclient import TestClient
 import numpy as np
-import sys
 
 # We need to mock the SentenceTransformer to prevent it from loading the model during tests
 class MockSentenceTransformer:
@@ -17,11 +16,11 @@ class MockSentenceTransformer:
         return embeddings / norms
 
 # Inject the mock
-import sentence_transformers
+import sentence_transformers  # noqa: E402
 sentence_transformers.SentenceTransformer = MockSentenceTransformer
 
 # Now import the app safely
-from app.main import app
+from app.main import app  # noqa: E402
 
 @pytest.fixture
 def app_client():

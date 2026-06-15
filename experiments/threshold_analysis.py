@@ -3,8 +3,6 @@ import time
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
-from sklearn.decomposition import PCA
-from sklearn.metrics.pairwise import cosine_similarity
 
 BASE_URL = "http://127.0.0.1:8000"
 

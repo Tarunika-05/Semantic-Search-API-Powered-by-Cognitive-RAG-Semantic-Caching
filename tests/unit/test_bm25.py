@@ -38,8 +38,8 @@ def test_idf_higher_for_rare_terms(bm25, corpus):
     bm25.fit(corpus)
     # "the" is in 2 docs, "jumps" is in 1 doc.
     # We don't have direct access to vocab mapping, but we can score single terms
-    score_jumps = bm25.score("jumps")[0]
-    score_the = bm25.score("the")[0]
+    bm25.score("jumps")
+    bm25.score("the")
     # Because jumps is rarer, its IDF is higher, and the doc is longer, but usually IDF dominates
     # Let's just check that IDF values are positive
     assert np.all(bm25.idf >= 0)

@@ -1,6 +1,5 @@
 import pytest
 import numpy as np
-import faiss
 from app.hybrid_search import BM25Index, HybridSearcher
 from app.vector_store import build_index
 

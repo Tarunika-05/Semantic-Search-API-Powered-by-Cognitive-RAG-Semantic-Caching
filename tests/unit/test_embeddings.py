@@ -1,4 +1,3 @@
-import pytest
 from app.embeddings import get_model
 import numpy as np
 

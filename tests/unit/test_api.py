@@ -1,4 +1,3 @@
-import pytest
 
 def test_query_endpoint(app_client):
     response = app_client.post(

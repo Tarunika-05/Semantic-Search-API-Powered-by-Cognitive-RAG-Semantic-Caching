@@ -1,4 +1,4 @@
-from fastapi import APIRouter, HTTPException, Query, Request, Depends, Header
+from fastapi import APIRouter, HTTPException, Request, Depends
 from fastapi.responses import RedirectResponse
 from pydantic import BaseModel
 import numpy as np
@@ -10,10 +10,10 @@ router = APIRouter()
 # Request / Response Models
 # ─────────────────────────────────────────────────────────────────────
 
-from app.rate_limit import limiter
-from app.logger import get_logger
-import time
-from app.analytics import log_query, get_analytics_stats
+from app.rate_limit import limiter  # noqa: E402
+from app.logger import get_logger  # noqa: E402
+import time  # noqa: E402
+from app.analytics import log_query, get_analytics_stats  # noqa: E402
 
 logger = get_logger("api")
 
@@ -172,7 +172,7 @@ async def query_endpoint(request: Request, payload: QueryRequest):
     generated_answer = None
     citations = []
     if payload.generate and top_docs:
-        from app.llm import generate_answer, AzureOpenAIProvider, DummyProvider
+        from app.llm import generate_answer, AzureOpenAIProvider
         provider = AzureOpenAIProvider()
         generated_answer = generate_answer(query, top_docs, provider=provider)
         # Build strong citations
@@ -231,7 +231,7 @@ async def hybrid_query_endpoint(request: Request, payload: HybridQueryRequest):
     generated_answer = None
     citations = []
     if payload.generate and top_docs:
-        from app.llm import generate_answer, AzureOpenAIProvider, DummyProvider
+        from app.llm import generate_answer, AzureOpenAIProvider
         provider = AzureOpenAIProvider()
         generated_answer = generate_answer(query, top_docs, provider=provider)
         for doc, idx, score in zip(top_docs, indices, scores):
@@ -285,7 +285,7 @@ async def filtered_query_endpoint(request: Request, payload: FilteredQueryReques
     generated_answer = None
     citations = []
     if payload.generate and top_docs:
-        from app.llm import generate_answer, AzureOpenAIProvider, DummyProvider
+        from app.llm import generate_answer, AzureOpenAIProvider
         provider = AzureOpenAIProvider()
         generated_answer = generate_answer(query, top_docs, provider=provider)
         for doc, idx, score in zip(top_docs, indices, scores):

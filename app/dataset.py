@@ -228,7 +228,7 @@ def load_documents():
     # Category distribution — check that I haven't accidentally
     # wiped out entire categories during filtering.
     cat_counts = Counter(labels)
-    print(f"   Category distribution:")
+    print("   Category distribution:")
     for cat_id, count in sorted(cat_counts.items()):
         print(f"     {label_names[cat_id][:30]:<30s} {count:>4d} docs")
     print(f"{'-'*55}")

@@ -1,4 +1,3 @@
-import pytest
 from app.dataset import load_documents
 
 def test_load_documents_coverage(monkeypatch):

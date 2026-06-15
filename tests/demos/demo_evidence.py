@@ -3,7 +3,6 @@ import numpy as np
 from fastapi.testclient import TestClient
 from unittest.mock import patch, MagicMock
 
-import app.main
 
 # Mock the entire loading process before importing the app
 @pytest.fixture(autouse=True)
