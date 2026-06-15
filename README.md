@@ -1,3 +1,11 @@
+---
+title: Cognitive RAG Semantic Search
+emoji: 🚀
+colorFrom: blue
+colorTo: indigo
+sdk: docker
+app_port: 7860
+---
 # Semantic Search API: Powered by Cognitive RAG & Semantic Caching
 
 ![CI](https://github.com/yourusername/Semantic-Search-API-Powered-by-Cognitive-RAG-Semantic-Caching/actions/workflows/ci.yml/badge.svg)

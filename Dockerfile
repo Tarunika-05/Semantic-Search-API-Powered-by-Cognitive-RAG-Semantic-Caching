@@ -48,11 +48,10 @@ COPY --chown=appuser:appuser . .
 # Switch to the non-root user
 USER appuser
 
-# Expose port 8000
-EXPOSE 8000
+# Expose port 7860
+EXPOSE 7860
 
 # ─────────────────────────────────────────────────────────────────────
 # Start the FastAPI service
-# --host 0.0.0.0 is required inside Docker
-# ─────────────────────────────────────────────────────────────────────
-CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]
+# Hugging Face Spaces provides the PORT environment variable (default 7860).
+CMD uvicorn app.main:app --host 0.0.0.0 --port ${PORT:-7860}
