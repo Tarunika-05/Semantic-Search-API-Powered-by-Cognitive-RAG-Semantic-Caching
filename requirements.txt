@@ -22,3 +22,5 @@ greenlet
 psycopg2-binary
 
 python-dotenv
+
+aiosqlite
