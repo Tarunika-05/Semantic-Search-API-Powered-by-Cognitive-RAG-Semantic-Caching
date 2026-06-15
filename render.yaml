@@ -15,9 +15,11 @@ services:
       - key: DATABASE_URL
         sync: false # Set manually in dashboard to Neon DB
       - key: LLM_PROVIDER
-        value: gemini
-      - key: GEMINI_API_KEY
-        sync: false # Set manually in dashboard
+        value: azure
+      - key: AZURE_OPENAI_ENDPOINT
+        sync: false
+      - key: AZURE_OPENAI_API_KEY
+        sync: false
       - key: CORS_ORIGINS
         # Allow requests from the frontend site (we will update this once frontend URL is known, or allow all for now)
         value: "*"
