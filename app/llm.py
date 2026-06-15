@@ -50,7 +50,7 @@ class AzureOpenAIProvider(LLMProvider):
             logger.error(f"Error generating Azure OpenAI content: {e}")
             try:
                 error_body = e.read().decode('utf-8')
-            except:
+            except Exception:
                 error_body = str(e)
             return f"AZURE ERROR: {error_body}"
 
