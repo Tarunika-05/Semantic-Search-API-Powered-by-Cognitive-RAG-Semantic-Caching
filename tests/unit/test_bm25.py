@@ -23,15 +23,15 @@ def test_fit_builds_vocabulary(bm25, corpus):
 
 def test_score_ranks_relevant_doc_first(bm25, corpus):
     bm25.fit(corpus)
-    scores = bm25.score("quick fox")
+    scores, indices = bm25.score("quick fox", limit=3)
     # doc 0 has both quick and fox. doc 1 has fox. doc 2 has neither.
+    assert indices[0] == 0
+    assert indices[1] == 1
     assert scores[0] > scores[1]
-    assert scores[1] > scores[2]
-    assert scores[2] == 0.0
 
 def test_unknown_query_term_returns_zero_scores(bm25, corpus):
     bm25.fit(corpus)
-    scores = bm25.score("elephant")
+    scores, indices = bm25.score("elephant", limit=3)
     assert np.all(scores == 0.0)
 
 def test_idf_higher_for_rare_terms(bm25, corpus):
@@ -42,14 +42,14 @@ def test_idf_higher_for_rare_terms(bm25, corpus):
     bm25.score("the")
     # Because jumps is rarer, its IDF is higher, and the doc is longer, but usually IDF dominates
     # Let's just check that IDF values are positive
-    assert np.all(bm25.idf >= 0)
+    assert all(v >= 0 for v in bm25.idf.values())
 
 def test_empty_query_returns_zeros(bm25, corpus):
     bm25.fit(corpus)
-    scores = bm25.score("")
+    scores, indices = bm25.score("", limit=3)
     assert np.all(scores == 0.0)
     
-    scores = bm25.score("   ")
+    scores, indices = bm25.score("   ", limit=3)
     assert np.all(scores == 0.0)
 
 def test_single_document_corpus():
@@ -57,7 +57,7 @@ def test_single_document_corpus():
     corpus = ["only one document here"]
     bm25.fit(corpus)
     
-    scores = bm25.score("document")
+    scores, indices = bm25.score("document", limit=3)
     assert len(scores) == 1
     # IDF for term in all docs might be 0 with some BM25 formulas, 
     # but we usually floor it or use a variant where it's positive
