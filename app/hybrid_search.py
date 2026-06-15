@@ -261,7 +261,7 @@ class HybridSearcher:
             })
 
         # Sort by hybrid score descending
-        scored_candidates.sort(key=lambda x: float(x["hybrid_score"]), reverse=True)
+        scored_candidates.sort(key=lambda x: float(x["hybrid_score"] or 0.0), reverse=True)
         
         # Slicing for pagination after the fusion is complete
         top_results = scored_candidates[offset:offset+limit]
